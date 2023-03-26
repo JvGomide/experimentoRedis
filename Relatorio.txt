@@ -1,3 +1,5 @@
+João Vitor Gomide campos - 21003360
+
 Explicação do programa:
 
 Ideia:
@@ -21,6 +23,18 @@ redisManagement-v2.py
 Esse foi o primeiro arquivo de monitoramento do mongo que foi feito, nele consta parte das funções do redisManagement.py, como: cacheData(), checkCache() e getFromCache(), junto com o while.
 
 Observação 
-Durante a realização da atividade, percebi que com o primeiro desenvolvimento do redisManagement.py as possibilidades ficavam muito travadas, tendo que fazer verificações no REDIS via terminal, e no mongoDB através do Atlas, e caso precisasse fazer algum tipo de motificação (inserção/exclusão) de um documento também necessitava ser pelo Atlas, com isso me dispus a fazer um pouco mais foi ai que uma melhoria do redisManagement.py surgiu.  
+Durante a realização da atividade, percebi que com o primeiro desenvolvimento do redisManagement.py as possibilidades ficavam muito travadas, tendo que fazer verificações no REDIS via terminal, e no mongoDB através do Atlas, e caso precisasse fazer algum tipo de motificação (inserção/exclusão) de um documento também necessitava ser pelo Atlas, com isso me dispus a fazer um pouco mais foi ai que uma melhoria do redisManagement.py surgiu. E foi concebido o main.py
+
+main.py
+O arquivo que junta todos os outros (mongoConnection.py e redisManagement.py). Agora nele o objetivo principal das atualizções do redisManagement.py era que tudo relacionado ao controle do cache fosse feito dentro do próprio programa e isso foi feito com o conceito de Thread que é inicializado no redisManagement.py e a thread se inicia assim que o main é interpretado. Agora dentro do main.py fica a critério do usuário o que ele deseja fazer, ao todo são 10 possibilidades, em ordem são elas: Sair, Ver Dados do Banco, Ver chaves do REDIS, Inserir uma quantidade de alunos gerada automaticamente, Inserir um aluno no banco, Encontrar um estudante no banco, Encontrar um estudante no REDIS, Limpar completamente o banco de dados, Excluir um estudante do banco de dados, Limpa o Cache. E dessa forma o usuário escolhe o que quer fazer e sem parar o o programa o usuário faz as ações e consegue ver o resultado da sua execução no prompt, sem a necessidade de ter o Atlas aberto ou ficar verificando no REDIS.
+
+Fontes:
+https://www.w3schools.com/python/python_mongodb_getstarted.asp
+https://realpython.com/python-redis/
+https://www.mongodb.com/docs/
+https://redis.io/docs/getting-started/
+
+Ferramentas Auxiliares:
+https://chat.openai.com/ (Chat-GPT3)
 
 

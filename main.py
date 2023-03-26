@@ -9,7 +9,7 @@ print("Seja bem vindo ao cache companion")
 
 while True:
 
-  userOption = input("Por favor, escolha uma opção: \n0) Para Sair \n1) Ver todos os dados do banco \n2) Ver todas as chaves do redis \n3) Inserir estudantes no banco de dados \n4) Inserir um estudantes no banco de dados \n5) Encontrar um estudante no banco \n6) Encontrar um estudante no REDIS \n7) Limpar banco de dados \n8) Excluir um Estudante \n9) Para limapr o Cache")
+  userOption = input("Por favor, escolha uma opção: \n0) Para Sair \n1) Ver todos os dados do banco \n2) Ver todas as chaves do redis \n3) Inserir estudantes no banco de dados \n4) Inserir um estudantes no banco de dados \n5) Encontrar um estudante no banco \n6) Encontrar um estudante no REDIS \n7) Limpar banco de dados \n8) Excluir um Estudante \n9) Para limapr o Cache\n")
   
   match userOption:
       case '0':

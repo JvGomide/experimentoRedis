@@ -8,7 +8,6 @@ def cacheData():
   data = list(mongoConnection.col.find())
   for student in data:
     redisClient.set(student['nome'], str(student))
-  #redisClient.set('mongoCached', str(data))
 
 def checkCache(key: str = '*'):
   if key != '*':
@@ -18,15 +17,19 @@ def checkCache(key: str = '*'):
   if data is None:
     cacheData()
 
-def updateCache():
-  cacheData()
-
-def clearCache(key = None):
-  if key == None:
+def clearCache(key = "*"):
+  if key == "*":
     redisClient.flushdb()
+    print("Cached DB clear!")
   else:
-    redisClient.delete(key)
+    res = redisClient.delete(key)
+    if res == 1:
+      print("Successful operation")
+    else:
+      print("Key not found!")
 
+
+      
 def getFromCache(key: str):
   checkCache()
   data = redisClient.get(key)
@@ -37,12 +40,7 @@ def run():
     try:
       with mongoConnection.col.watch() as stream:
         for change in stream:
-          if change['operationType'] == 'delete':
-            key = str(change['documentKey']['cpf'])
-            clearCache(key)
-          else:
-            cacheData()
-          print("Dados atualizados")
+          cacheData()
     except Exception as ex:
       print("Error: ", ex)
 

@@ -1,0 +1,26 @@
+Explicação do programa:
+
+Ideia:
+O ponto principal da ideia assim como sugerida no exercicio era fazer o armazenamento dos dados guardados em disco, serem armazenados em cache. Para isso uma das requisições era gerar uma massa de dados, no modelo de uma pessoa que acabou de receberr o resultado do seu vestibular de forma online. 
+
+Estrutura:
+O programa em si é divido em 4 arquivos para organização pessoal, como cada nome sugere no arquivo 'massGenerator.py' é onde se tem o código para criar a massa de dados. No arquivo 'mongoConnection.py' a conexão com o banco de dados e a população da tabela. No 'redisManagement.py' encontra-se o código para armazenar os dados em disco (MongoDB) em cache (Redis). E por último ''redisManagement-v2.py'.
+
+File-2-File
+
+massGenerator.py
+Neste arquivo concentra-se a geração de dados para alimentar o banco de dados, possui duas funções principais, generatePerson() é aquela que vai gerar uma grande massa de uma vez só e de forma randomica com o auxilio de algumas bibliotecas, createPerson() vai criar uma única pessoa, cujo os dados são atribuidos através de parametros, e posteriormente será inserida no banco de dados.
+
+mongoConnection.py
+Arquivo para conexão com o banco de dados, a ideia era concentrar todas as operações envolvendo o banco aqui, mas apenas a função para deletar um documento do banco foi feita.
+
+redisManagement.py
+Aqui concentra-se as funções de atualização em cache do banco junto com a conexão com o REDIS. Ao todo são 5 funções, cacheData() função que atribui todos os documentos da collection a uma lista e depois instancia o documento no REDIS sendo a chave o nome do aluno. checkCache(key: str = '*') essa função recebe como paramatro uma chave do tipo string, ele recebe um parametro chave que tem como valor default '*' que simboliza todos as chaves presentes no cache, essa chave é utilizada para verificar alguma chave no REDIS ou verificar todos as chaves, caso o Cache esteja vazio ele chama a cacheData(). clearCache(key = '*') vai limpar o cache, ele recebe um parametro chave que tem como valor default '*' que simboliza todos as chaves presentes no cache, se a função recebe algum parametro ele vai fazer a exclusão daquela chave no banco de dados (que é quem chama essa função) e no cache logo em seguida, se não receber parametros a função limpa todo o cache excluindo todas as chaves. getFromCache(key: str) seguindo o padrão das últimas funções recebe uma parametro chave do tipo string, a função verifica se tem algo no cache e se possuir retorna o estudante apartir do cache. E por último a função run() essa função execute um while q faz com que o REDIS monitore o banco de dados mongoDB e veja se houve alguma mudança e se tiver alguma mudança o cache é atualizado instataneamente.
+
+redisManagement-v2.py
+Esse foi o primeiro arquivo de monitoramento do mongo que foi feito, nele consta parte das funções do redisManagement.py, como: cacheData(), checkCache() e getFromCache(), junto com o while.
+
+Observação 
+Durante a realização da atividade, percebi que com o primeiro desenvolvimento do redisManagement.py as possibilidades ficavam muito travadas, tendo que fazer verificações no REDIS via terminal, e no mongoDB através do Atlas, e caso precisasse fazer algum tipo de motificação (inserção/exclusão) de um documento também necessitava ser pelo Atlas, com isso me dispus a fazer um pouco mais foi ai que uma melhoria do redisManagement.py surgiu.  
+
+

@@ -1,15 +1,22 @@
 import pymongo
-import massGenerator
+import redisManagement
 
-cli = pymongo.MongoClient('mongodb+srv://jvgomide:jvgc2001@cluster0.r8ulunl.mongodb.net/?retryWrites=true&w=majority')
+cli = pymongo.MongoClient('mongodb+srv://comum:qwerty123456@cluster0.r8ulunl.mongodb.net/?retryWrites=true&w=majority')
 database = cli['Cluster0']
-col = database["Teste"]
+col = database["Participantes"]
 
 listaPessoas = [];
 
 def deleteUm(campo, valor):
   query = {campo: valor}
-  col.delete_one(query)
+  try:
+    col.delete_one(query)
+    redisKey = str(valor)
+    print(redisKey)
+    redisManagement.clearCache(redisKey)
+
+  except Exception as ex:
+    print("Erro:", ex)
 
 #for i in range(5):
 #  pessoa = massGenerator.generatePerson()
